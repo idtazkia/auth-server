@@ -4,11 +4,16 @@ Aplikasi ini menyediakan fasilitas Single Sign On untuk berbagai aplikasi lain.
 
 ## Daftar Fitur ##
 
-TBD
+* User Management
+* Client App Management
+* User Login
+* OAuth 2 Authorization Server
 
 ## Teknologi, Framework, Tools, Platform ##
 
-TBD
+* Spring Boot 2
+* PostgreSQL
+* Maven
 
 ## Lisensi ##
 
