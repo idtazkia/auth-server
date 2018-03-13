@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Aplikasi Penggadaian</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="robots" content="all,follow">
+        <!-- Bootstrap CSS-->
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <!-- Font Awesome CSS-->
+        <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+        <!-- Fontastic Custom icon font-->
+        <link rel="stylesheet" th:href="@{/css/fontastic.css}">
+        <!-- Google fonts - Poppins -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
+        <!-- theme stylesheet-->
+        <link rel="stylesheet" th:href="@{/css/style.default.css}" id="theme-stylesheet">
+        <!-- Custom stylesheet - for your changes-->
+        <link rel="stylesheet" th:href="@{/css/custom.css}">
+        <!-- Favicon-->
+        <link rel="shortcut icon" th:href="@{/img/favicon.ico}">
+    </head>
+    <body>
+        <div class="page">
+            <!-- Main Navbar-->
+            <header class="header">
+                <nav class="navbar">
+                    <!-- Search Box-->
+                    <div class="search-box">
+                        <button class="dismiss"><i class="icon-close"></i></button>
+                        <form id="searchForm" action="#" role="search">
+                            <input type="search" placeholder="What are you looking for..." class="form-control">
+                        </form>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="navbar-holder d-flex align-items-center justify-content-between">
+                            <!-- Navbar Header-->
+                            <div class="navbar-header">
+                                <!-- Navbar Brand --><a th:href="@{/}" class="navbar-brand">
+                                    <div class="brand-text brand-big"><span>Aplikasi </span> <strong> Penggadaian</strong></div>
+                                    <div class="brand-text brand-small"><strong>AP</strong></div></a>
+                                <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
+                            </div>
+                            <!-- Navbar Menu -->
+                            <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                                <!-- Logout    -->
+                                <li class="nav-item"><a href="#" class="btn btn-danger">Logout <i class="fa fa-sign-out"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <div class="page-content d-flex align-items-stretch"> 
+                <!-- Side Navbar -->
+                <nav class="side-navbar">
+                    <!-- Sidebar Header-->
+                    <div class="sidebar-header d-flex align-items-center">
+                        <div class="avatar"><img th:src="@{/img/avatar-1.jpg}" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="title">
+                            <h1 class="h4">Admin</h1>
+                            <p><i class="fa fa-circle text-success"></i> Online</p>
+                        </div>
+                    </div>
+                    <!-- Sidebar Navidation Menus--><span class="heading">Main Menu</span>
+                    <ul class="list-unstyled">
+                        <li><a th:href="@{/management/permission/list}"> <i class="fa fa-key"></i>Permission </a></li>
+                        <li><a th:href="@{/management/role/list}"> <i class="fa fa-check-square-o"></i>Role </a></li>
+                        <li><a th:href="@{/management/user/list}"> <i class="fa fa-users"></i>User </a></li>
+                        <li><a th:href="@{/management/client/list}"> <i class="fa fa-code-fork"></i>Client </a></li>
+                    </ul>
+                </nav>
+                <div class="content-inner">
+                    <!-- Page Header-->
+                    <header class="page-header">
+                        <div class="container-fluid">
+                            <h2 class="no-margin-bottom" th:text="${pageTitle}">Page Title</h2>
+                        </div>
+                    </header>
+                    <!-- Updates Section -->
+                    <section class="updates no-padding-top">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <section layout:fragment="content"></section>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Page Footer-->
+                    <footer class="main-footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p>Your company &copy; 2017-2019</p>
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                    <p>Design by <a href="https://bootstrapious.com/admin-templates" class="external">Bootstrapious</a></p>
+                                    <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+        <!-- JavaScript files-->
+        <script th:src="@{/js/jquery.min.js}"></script>
+        <script th:src="@{/js/popper.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/jquery.cookie.js}"></script>
+        <script th:src="@{/js/jquery.validate.min.js}"></script>
+    </body>
+</html>
