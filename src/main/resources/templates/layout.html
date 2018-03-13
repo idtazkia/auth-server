@@ -69,10 +69,10 @@
                     </div>
                     <!-- Sidebar Navidation Menus--><span class="heading">Main Menu</span>
                     <ul class="list-unstyled">
-                        <li><a th:href="@{/management/permission/list}"> <i class="fa fa-key"></i>Permission </a></li>
-                        <li><a th:href="@{/management/role/list}"> <i class="fa fa-check-square-o"></i>Role </a></li>
-                        <li><a th:href="@{/management/user/list}"> <i class="fa fa-users"></i>User </a></li>
-                        <li><a th:href="@{/management/client/list}"> <i class="fa fa-code-fork"></i>Client </a></li>
+                        <li th:class="${activeTab == 'permission'}? 'active' : null"><a th:href="@{/management/permission/list}"> <i class="fa fa-key"></i>Permission </a></li>
+                        <li th:class="${activeTab == 'role'}? 'active' : null"><a th:href="@{/management/role/list}"> <i class="fa fa-check-square-o"></i>Role </a></li>
+                        <li th:class="${activeTab == 'user'}? 'active' : null"><a th:href="@{/management/user/list}"> <i class="fa fa-users"></i>User </a></li>
+                        <li th:class="${activeTab == 'client'}? 'active' : null"><a th:href="@{/management/client/list}"> <i class="fa fa-code-fork"></i>Client </a></li>
                     </ul>
                 </nav>
                 <div class="content-inner">

@@ -8,12 +8,12 @@ import org.thymeleaf.dialect.springdata.SpringDataDialect;
 @SpringBootApplication
 public class AuthServerApplication {
 
-	@Bean
-	public SpringDataDialect springDataDialect() {
-		return new SpringDataDialect();
-	}
+    @Bean
+    public SpringDataDialect springDataDialect() {
+        return new SpringDataDialect();
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(AuthServerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AuthServerApplication.class, args);
+    }
 }
