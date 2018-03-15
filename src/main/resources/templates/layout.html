@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\\\\<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
@@ -83,13 +83,11 @@
                         </div>
                     </header>
                     <!-- Updates Section -->
-                    <section class="updates no-padding-top">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <section layout:fragment="content"></section>
-                            </div>
-                        </div>
+                    
+                    <section layout:fragment="content">
+                        <p>isi konten</p>
                     </section>
+                    
                     <!-- Page Footer-->
                     <footer class="main-footer">
                         <div class="container-fluid">
@@ -108,10 +106,11 @@
             </div>
         </div>
         <!-- JavaScript files-->
-        <script th:src="@{/js/jquery.min.js}"></script>
-        <script th:src="@{/js/popper.min.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script th:src="@{/js/tether.min.js}"></script>
         <script th:src="@{/js/bootstrap.min.js}"></script>
         <script th:src="@{/js/jquery.cookie.js}"></script>
         <script th:src="@{/js/jquery.validate.min.js}"></script>
+        <script th:src="@{/js/front.js}"></script>
     </body>
 </html>
