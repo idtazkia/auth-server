@@ -8,4 +8,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface UserDao extends PagingAndSortingRepository<User, String> {
 
     public Page<User> findByusernameContainingIgnoreCase(String username, Pageable page);
+
+    User findByUsername(String username);
 }

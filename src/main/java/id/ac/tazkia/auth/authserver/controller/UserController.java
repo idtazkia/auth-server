@@ -81,6 +81,35 @@ public class UserController {
             mm.addAttribute("user", user);
             return "user/form";
         }
+
+        User pUsername = userDao.findByUsername(user.getUsername());
+        if (pUsername != null && !pUsername.getId().equals(user.getId())) {
+            errors.rejectValue("username", "username", "username telah digunakan");
+            mm.addAttribute("user", user);
+            mm.addAttribute("listRole", roleDao.findAll());
+            return "user/form";
+        }
+        if (StringUtils.hasText(user.getId())) {
+            if (StringUtils.hasText(user.getPassword())) {
+                UserPassword userPassword = new UserPassword();
+                Optional<UserPassword> optional = userPasswordDao.findById(user.getId());
+                if (optional.isPresent()) {
+                    userPassword = optional.get();
+                }
+                userPassword.setPassword(user.getPassword());
+                userPasswordDao.save(userPassword);
+            }
+        } else {
+            String password = "admin";
+            if (StringUtils.hasText(user.getPassword())) {
+                password = user.getPassword();
+            }
+
+            UserPassword up = new UserPassword();
+            up.setPassword(password);
+            up.setUser(user);
+            user.setUserPassword(up);
+        }
         userDao.save(user);
         return "redirect:/management/user/list";
     }

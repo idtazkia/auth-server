@@ -23,12 +23,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/management/permission")
 public class PermissionController {
     
-    @Autowired 
+    @Autowired
     private PermissionDao permissionDao;
     
     @GetMapping("/list")
-    public String daftarPermission(ModelMap mm, @PageableDefault(size = 10)Pageable page){
-        Page<Permission> result = permissionDao.findAll(page);
+    public String daftarPermission(ModelMap mm, @RequestParam(value = "key", required = false) String key,
+            @PageableDefault(size = 10) Pageable page) {
+        Page<Permission> result;
+        
+        if (key != null) {
+            
+            result = permissionDao.findBypermissionValueContainingIgnoreCase(key, page);
+            mm.addAttribute("key", key);
+        } else {
+            
+            result = permissionDao.findAll(page);
+        }
         mm.addAttribute("data", result);
         return "permission/list";
     }
@@ -37,15 +47,14 @@ public class PermissionController {
     public String pageTitle() {
         return "Daftar Permission";
     }
-  
     
     @GetMapping("/form")
-    public String tampilkanForm(@RequestParam(required = false) String id, ModelMap mm){
+    public String tampilkanForm(@RequestParam(required = false) String id, ModelMap mm) {
         Permission permission = new Permission();
-        if(StringUtils.hasText(id)){
-            Optional <Permission> p = permissionDao.findById(id);
-            if(p.isPresent()){
-               permission  = p.get();
+        if (StringUtils.hasText(id)) {
+            Optional<Permission> p = permissionDao.findById(id);
+            if (p.isPresent()) {
+                permission = p.get();
             }
         }
         
@@ -54,15 +63,15 @@ public class PermissionController {
     }
     
     @PostMapping("/form")
-    public String prossesForm(@ModelAttribute @Valid Permission p, BindingResult errors, ModelMap mm){
-        if (errors.hasErrors()){
+    public String prossesForm(@ModelAttribute @Valid Permission p, BindingResult errors, ModelMap mm) {
+        if (errors.hasErrors()) {
             mm.addAttribute("permission", p);
             
             return "permission/form";
         }
 //         validasi value       \\
         Permission pLabel = permissionDao.findByPermissionLabel(p.getPermissionLabel());
-        if (pLabel != null && !pLabel.getId().equals(p.getId())){
+        if (pLabel != null && !pLabel.getId().equals(p.getId())) {
             errors.rejectValue("permissionLabel", "permissionLabel", "Label Permission telah digunakan");
             mm.addAttribute("permission", p);
             
@@ -70,7 +79,7 @@ public class PermissionController {
         }
         
         Permission pValue = permissionDao.findByPermissionValue(p.getPermissionValue());
-        if (pValue != null && !pValue.getId().equals(p.getId())){
+        if (pValue != null && !pValue.getId().equals(p.getId())) {
             errors.rejectValue("permissionValue", "permissionValue", "Value Permission telah digunakan");
             mm.addAttribute("permission", p);
             
@@ -82,11 +91,11 @@ public class PermissionController {
     }
     
     @GetMapping("/delete")
-    public String deleteData(@RequestParam(value = "id", required = false) String id){
+    public String deleteData(@RequestParam(value = "id", required = false) String id) {
         permissionDao.deleteById(id);
         
         return "redirect:/management/permission/list";
-    
-    }  
+        
+    }
     
 }
