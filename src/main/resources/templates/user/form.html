@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="activeTab='user'"
       layout:decorate="~{layout}">
     <head>
         <meta charset="UTF-8" />
@@ -57,22 +58,18 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group row">
                                         <label class="col-sm-3 form-control-label">Client</label>
-                                        <div class="form-group">
-                                            <div class="col-sm-9">
-                                                <div class="checkbox" th:each="x : ${listClient}">
-                                                    <label>
-                                                        <input type="checkbox" th:field="*{clients}" th:value="${x.id}" />
-                                                        <span th:text="${x.appName}"></span>
-                                                    </label>
-                                                </div>
+                                        <div class="col-sm-9">
+                                            <div th:each="x : ${listClient}">
+                                                <input type="checkbox" th:field="*{clients}" th:value="${x.id}" />
+                                                <label th:text="${x.appName}">Option List</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">       
                                         <div class="col-sm-9 offset-sm-3">
-                                            <input type="submit" value="Submit" class="btn btn-primary">
+                                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button>
                                         </div>
                                     </div>
                                 </form>

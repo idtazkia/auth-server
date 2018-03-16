@@ -105,10 +105,12 @@ public class UserController {
                 password = user.getPassword();
             }
 
+            user = userDao.save(user);
             UserPassword up = new UserPassword();
             up.setPassword(password);
             up.setUser(user);
             user.setUserPassword(up);
+            userPasswordDao.save(up);
         }
         userDao.save(user);
         return "redirect:/management/user/list";

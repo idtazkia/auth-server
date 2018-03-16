@@ -1,5 +1,6 @@
 package id.ac.tazkia.auth.authserver.controller;
 
+import id.ac.tazkia.auth.authserver.dao.PermissionDao;
 import id.ac.tazkia.auth.authserver.dao.RoleDao;
 import id.ac.tazkia.auth.authserver.entity.Role;
 import java.util.Optional;
@@ -21,40 +22,52 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/management/role")
 public class RoleController {
-    
+
     @Autowired
     private RoleDao roleDao;
-    
-    
+
+    @Autowired
+    private PermissionDao permissionDao;
+
     @GetMapping("/list")
-    public String daftarRole(ModelMap mm, @PageableDefault(size = 10) Pageable pageable) {
-        Page<Role> result = roleDao.findAll(pageable);
+    public String daftarRole(ModelMap mm, @RequestParam(value = "key", required = false) String key,
+            @PageableDefault(size = 10) Pageable page) {
+        Page<Role> result;
+
+        if (key != null) {
+
+            result = roleDao.findBynameContainingIgnoreCase(key, page);
+        } else {
+
+            result = roleDao.findAll(page);
+
+        }
         mm.addAttribute("data", result);
         return "role/list";
     }
-    
+
     @GetMapping("/form")
     public String tampilkanForm(@RequestParam(required = false) String id, ModelMap mm) {
         Role role = new Role();
-        if(StringUtils.hasText(id)){
-            Optional <Role> r = roleDao.findById(id);
-            if(r.isPresent()){
+        if (StringUtils.hasText(id)) {
+            Optional<Role> r = roleDao.findById(id);
+            if (r.isPresent()) {
                 role = r.get();
             }
         }
-    
+        mm.addAttribute("listPermission", permissionDao.findAll());
         mm.addAttribute("role", role);
         return "role/form";
-    
+
     }
-    
+
     @PostMapping("/form")
-    public String prosesForm(@Valid Role role, BindingResult errors, ModelMap mm){
+    public String prosesForm(@Valid Role role, BindingResult errors, ModelMap mm) {
         if (errors.hasErrors()) {
             mm.addAttribute("role", role);
             mm.addAttribute("listRole", roleDao.findAll());
         }
-    
+
         // =========== Validasi Name =============
         Role rName = roleDao.findByName(role.getName());
         if (rName != null && !rName.getId().equals(role.getId())) {
@@ -63,20 +76,20 @@ public class RoleController {
             mm.addAttribute("listPermission", roleDao.findAll());
             return "role/form";
         }
-        
+
         roleDao.save(role);
         return "redirect:/management/role/list";
     }
-    
+
     @GetMapping("/delete")
     public String deleteData(@RequestParam(required = false) String id) {
         roleDao.deleteById(id);
         return "redirect:/management/role/list";
     }
-    
+
     @ModelAttribute("pageTitle")
     public String pageTitle() {
         return "Daftar Role";
     }
-    
+
 }
