@@ -11,6 +11,8 @@
         <meta name="robots" content="all,follow">
         <!-- Bootstrap CSS-->
         <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap.css}">
+        <link rel="stylesheet" th:href="@{/css/buttons.dataTables.min.css}">
         <!-- Font Awesome CSS-->
         <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
         <!-- Fontastic Custom icon font-->
@@ -112,5 +114,19 @@
         <script th:src="@{/js/jquery.cookie.js}"></script>
         <script th:src="@{/js/jquery.validate.min.js}"></script>
         <script th:src="@{/js/front.js}"></script>
+        <script th:src="@{/js/jquery.dataTables.min.js}"></script>
+        <script th:src="@{/js/dataTables.bootstrap.min.js}"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.scroll-horizontal').DataTable({
+                    "scrollX": true,
+                    "paging": false,
+                    "ordering": false,
+                    "searching": false,
+                    "info": false
+                });
+            });
+        </script>
+
     </body>
 </html>

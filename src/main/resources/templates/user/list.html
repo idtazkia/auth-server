@@ -50,38 +50,40 @@
                                         <h3 class="h4">Daftar User</h3>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Email</th>
-                                                    <th>Full Name</th>
-                                                    <th>Username</th>
-                                                    <th>Role</th>
-                                                    <th>Action</th>
-                                                    <th>&nbsp;</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr th:each="user : ${data.content}">
-                                                    <td><span th:text="${user.email}"></span></td>
-                                                    <td><span th:text="${user.fullname}"></span></td>
-                                                    <td><span th:text="${user.username}"></span></td>
-                                                    <td><span th:text="${user.role.name}"></span></td>
-                                                    <td>
-                                                        <a th:href="@{/management/user/form(id=${user.id})}">
-                                                            <button class="btn btn-info btn-sm ladda-button"><i class="fa fa-pencil"></i> edit</button>
-                                                        </a>
-                                                        <a th:href="@{/management/user/delete(id=${user.id})}">
-                                                            <button class="btn btn-danger btn-sm ladda-button"><i class="fa fa-trash"></i> Delete</button>
-                                                        </a>
-                                                    </td>
-                                                </tr> 
-                                            </tbody>
-                                        </table>
-                                        <div class="box-footer clearfix text-center">
-                                            <div th:if="${not #lists.isEmpty(data.content)}">
-                                                <ul class="pagination" sd:pagination="full"></ul>
-                                            </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Email</th>
+                                                        <th>Full Name</th>
+                                                        <th>Username</th>
+                                                        <th>Role</th>
+                                                        <th>Action</th>
+                                                        <th>&nbsp;</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="user : ${data.content}">
+                                                        <td><span th:text="${user.email}"></span></td>
+                                                        <td><span th:text="${user.fullname}"></span></td>
+                                                        <td><span th:text="${user.username}"></span></td>
+                                                        <td><span th:text="${user.role.name}"></span></td>
+                                                        <td>
+                                                            <a th:href="@{/management/user/form(id=${user.id})}">
+                                                                <button class="btn btn-info btn-sm ladda-button"><i class="fa fa-pencil"></i> edit</button>
+                                                            </a>
+                                                            <a th:href="@{/management/user/delete(id=${user.id})}">
+                                                                <button class="btn btn-danger btn-sm ladda-button"><i class="fa fa-trash"></i> Delete</button>
+                                                            </a>
+                                                        </td>
+                                                    </tr> 
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="box-footer clearfix text-center" style="margin-bottom: 10px;">
+                                        <div th:if="${not #lists.isEmpty(data.content)}">
+                                            <ul class="pagination" sd:pagination="full"></ul>
                                         </div>
                                     </div>
                                 </div>

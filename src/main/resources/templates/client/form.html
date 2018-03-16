@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="activeTab='client'"
+      layout:decorate="~{layout}">
+    <head>
+        <title>Form Client</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-close">
+                                <div class="dropdown">
+                                    <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                                    <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                                </div>
+                            </div>
+                            <div class="card-header d-flex align-items-center">
+                                <h3 class="h4">Client Form</h3>
+                            </div>
+                            <div class="card-body">
+                                <form class="form" th:action="@{/management/client/form}" th:method="post" th:object="${client}">
+                                    <input type="hidden" th:field="*{id}" />
+                                    <div class="form-group">
+                                        <label>App Name</label>
+                                        <input type="text" class="form-control" placeholder="App Name" th:field="*{appName}">
+                                        <div class="help-block with-errors" th:if="${#fields.hasErrors('appName')}" th:errors="*{appName}"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Client ID</label>
+                                        <input type="text" class="form-control" placeholder="Client ID" th:field="*{clientId}">
+                                        <div class="help-block with-errors" th:if="${#fields.hasErrors('clientId')}" th:errors="*{clientId}"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Client Secret</label>
+                                        <input type="text" class="form-control" placeholder="Client Secret" th:field="*{clientSecret}">
+                                        <div class="help-block with-errors" th:if="${#fields.hasErrors('clientSecret')}" th:errors="*{clientSecret}"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Scope</label>
+                                        <input type="text" class="form-control" placeholder="Scope" th:field="*{scope}" />
+                                        <div class="help-block with-errors" th:if="${#fields.hasErrors('scope')}" th:errors="*{scope}"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Resource ID</label>    
+                                        <input type="text" class="form-control" placeholder="Resource ID" th:field="*{resourceId}" />
+                                        <div class="help-block with-errors" th:if="${#fields.hasErrors('resourceId')}" th:errors="*{resourceId}"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Authorized Grant Type</label>
+                                        <select class="form-control" th:field="*{authorizedGrantTypes}">
+                                            <option value="">-- Pilih --</option>
+                                            <option value="refresh_token">Refresh Token</option>
+                                            <option value="authorization_code">Authorization Code</option>
+                                            <option value="implicit">Implicit</option>
+                                            <option value="password">Password</option>
+                                            <option value="client_credentials">Client Credentials</option>
+                                        </select>
+                                        <div class="help-block with-errors" th:if="${#fields.hasErrors('authorizedGrantTypes')}" th:errors="*{authorizedGrantTypes}"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Redirect Url</label>
+                                        <input type="text" class="form-control" placeholder="Redirect Url" th:field="*{redirectUri}">
+                                        <div class="help-block with-errors" th:if="${#fields.hasErrors('redirectUri')}" th:errors="*{redirectUri}"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Authorities</label>
+                                        <input type="text" class="form-control" placeholder="Authorities" th:field="*{authorities}">
+                                        <div class="help-block with-errors" th:if="${#fields.hasErrors('authorities')}" th:errors="*{authorities}"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Access Token Validity</label>
+                                        <input type="text" class="form-control" placeholder="Access Token Validity" th:field="*{accessTokenValidity}">
+                                        <div class="help-block with-errors" th:if="${#fields.hasErrors('accessTokenValidity')}" th:errors="*{accessTokenValidity}"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Refresh Token Validity</label>
+                                        <input type="text" class="form-control" placeholder="Refresh Token Validity" th:field="*{refreshTokenValidity}">
+                                        <div class="help-block with-errors" th:if="${#fields.hasErrors('refreshTokenValidity')}" th:errors="*{refreshTokenValidity}"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Additional Information</label>
+                                        <textarea class="form-control" rows="3" placeholder="Additional Information" th:field="*{additionalInformation}"></textarea>
+                                        <div class="help-block with-errors" th:if="${#fields.hasErrors('additionalInformation')}" th:errors="*{additionalInformation}"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Auto Approve</label>
+                                        <select class="form-control" th:field="*{autoApprove}">
+                                            <option value="true">True</option>
+                                            <option value="false">False</option>
+                                        </select>
+                                        <div class="help-block with-errors" th:if="${#fields.hasErrors('autoApprove')}" th:errors="*{autoApprove}"></div>
+                                    </div>
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-success pull-right"><i class="fa fa-save"></i> Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
