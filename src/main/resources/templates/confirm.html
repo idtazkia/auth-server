@@ -4,7 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>Login</title>
+        <title>Reset Password</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="description" content=""/>
@@ -62,14 +62,21 @@
                         <div class="col-lg-6 bg-white">
                             <div class="form d-flex align-items-center">
                                 <div class="content">
-                                    <form id="login-form" method="post" th:action="@{/reset}">
-                                        <center>
-                                            <p><h1>Password Recovery</h1></p>
-                                        </center>
-                                        <div class="form-group">
-                                            <input id="login-username" type="text" name="user" required="" class="input-material">
-                                            <label for="login-username" class="label-material">Enter Your User Name</label>
+                                    <form id="login-form" method="post" th:action="@{/confirm}" th:object="${confirm}">
+                                        <div class="content">
+                                            <div class="logo" align="center">
+                                                <h1>Create New Password</h1><br>
+                                            </div>
                                         </div>
+                                        <div class="form-group">
+                                            <input id="password" type="password" name="user" required="" class="input-material">
+                                            <label for="password" class="label-material">Enter Your New Password</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <input id="confirm_passwod" type="password" name="user" required="" class="input-material">
+                                            <label for="confirm_passwod" class="label-material">Re-Type Password</label>
+                                        </div>
+                                        <input type="hidden" id="code" name="code" th:value="${code}">
                                         <input type="submit" class="btn btn-primary" VALUE="Reset"><br>
                                         <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                                     </form>

@@ -62,16 +62,13 @@
                         <div class="col-lg-6 bg-white">
                             <div class="form d-flex align-items-center">
                                 <div class="content">
-                                    <form id="login-form" method="post" th:action="@{/reset}">
-                                        <center>
-                                            <p><h1>Password Recovery</h1></p>
-                                        </center>
-                                        <div class="form-group">
-                                            <input id="login-username" type="text" name="user" required="" class="input-material">
-                                            <label for="login-username" class="label-material">Enter Your User Name</label>
+                                    <form id="login-form" method="post" >
+                                        <div class="content">
+                                            <div class="logo">
+                                                <h1>Terimakasih</h1>
+                                            </div>
+                                            <p>Silahkan cek email Anda untuk merubah password.</p>
                                         </div>
-                                        <input type="submit" class="btn btn-primary" VALUE="Reset"><br>
-                                        <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                                     </form>
                                     <br>
                                     <small>Back To Login? </small><a th:href="@{/login}" class="signup">Login</a>

@@ -120,3 +120,12 @@ ALTER TABLE ONLY c_security_user_password
     ADD CONSTRAINT fk80arji7i1u0styufcy8b91it5 FOREIGN KEY (id_user) REFERENCES c_security_user(id);
 
 
+CREATE TABLE reset_password (
+  id VARCHAR(36) NOT NULL ,
+  id_user VARCHAR(36) NOT NULL ,
+  code VARCHAR(36) NOT NULL ,
+  expired DATE NOT NULL ,
+  PRIMARY KEY (id),
+  FOREIGN KEY (id_user) REFERENCES c_security_user(id)
+);
+
