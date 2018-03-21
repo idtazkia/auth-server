@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -48,7 +49,9 @@ public class KonfigurasiSecurity extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .anyRequest().authenticated()
-                .and().logout().permitAll()
+                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login").deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true).permitAll()
                 .and().formLogin().defaultSuccessUrl("/")
                 .loginPage("/login")
                 .permitAll();
@@ -63,7 +66,6 @@ public class KonfigurasiSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/*")
                 .antMatchers("/img/**")
                 .antMatchers("/images/*")
-                .antMatchers("/")
                 .antMatchers("/reset-sukses")
                 .antMatchers("/reset")
                 .antMatchers("/404")

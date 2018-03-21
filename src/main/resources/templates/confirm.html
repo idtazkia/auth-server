@@ -69,12 +69,13 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <input id="password" type="password" name="user" required="" class="input-material">
+                                           <input name="password" id="password" type="password" class="input-material">
                                             <label for="password" class="label-material">Enter Your New Password</label>
                                         </div>
                                         <div class="form-group">
-                                            <input id="confirm_passwod" type="password" name="user" required="" class="input-material">
-                                            <label for="confirm_passwod" class="label-material">Re-Type Password</label>
+                                            <input type="password" name="confirm_password" id="confirm_password"  class="input-material">
+                                            <span id='message'></span>
+                                            <label for="confirm_password" class="label-material">Re-Type Password</label>
                                         </div>
                                         <input type="hidden" id="code" name="code" th:value="${code}">
                                         <input type="submit" class="btn btn-primary" VALUE="Reset"><br>
@@ -105,4 +106,14 @@
         <!-- Main File-->
         <script th:src="@{/js/front.js}"></script>
     </body>
+    
+<!--//Confirm password-->
+    <script>
+        $('#password, #confirm_password').on('keyup', function () {
+            if ($('#password').val() == $('#confirm_password').val()) {
+                $('#message').html('Matching').css('color', 'green');
+            } else
+                $('#message').html('Not Matching').css('color', 'red');
+        });
+    </script>
 </html>

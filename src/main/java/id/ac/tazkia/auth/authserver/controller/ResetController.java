@@ -10,6 +10,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ public class ResetController {
     @Autowired private UserDao userDao;
     @Autowired private ResetPasswordDao resetDao;
     @Autowired private UserPasswordDao userPasswordDao;
+    @Autowired private PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "/reset", method = RequestMethod.GET)
     public void reset(){}
@@ -84,4 +86,27 @@ public class ResetController {
         return "/confirm";
     }
 
+
+    @PostMapping("/confirm")
+    public String updatePassword(@RequestParam String code,
+                                 @RequestParam String password){
+
+
+        ResetPassword resetPassword = resetDao.findByCode(code);
+
+
+        UserPassword up = userPasswordDao.findByUser(resetPassword.getUser());
+        if(up == null){
+            LOGGER.info("User tidak ditemukan :" + up);
+            up = new UserPassword();
+            up.setUser(resetPassword.getUser());
+        }
+        up.setPassword(passwordEncoder.encode(password));
+
+
+        userPasswordDao.save(up);
+        return "redirect:login";
+
+
+    }
 }
