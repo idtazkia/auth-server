@@ -6,6 +6,7 @@ import id.ac.tazkia.auth.authserver.dao.UserPasswordDao;
 import id.ac.tazkia.auth.authserver.entity.ResetPassword;
 import id.ac.tazkia.auth.authserver.entity.User;
 import id.ac.tazkia.auth.authserver.entity.UserPassword;
+import id.ac.tazkia.auth.authserver.service.NotifikasiService;
 import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ public class ResetController {
     @Autowired private ResetPasswordDao resetDao;
     @Autowired private UserPasswordDao userPasswordDao;
     @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired private NotifikasiService notifikasiService;
 
     @RequestMapping(value = "/reset", method = RequestMethod.GET)
     public void reset(){}
@@ -57,6 +59,7 @@ public class ResetController {
         rp.setExpired(LocalDate.now().plusDays(3));
 
         resetDao.save(rp);
+        notifikasiService.resetPassword(rp);
         return "redirect:reset-sukses";
     }
 
