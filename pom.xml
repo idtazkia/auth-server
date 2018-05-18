@@ -5,7 +5,7 @@
 
     <groupId>id.ac.tazkia.auth</groupId>
     <artifactId>auth-server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>jar</packaging>
 
     <name>auth-server</name>
@@ -24,6 +24,7 @@
         <thymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity4.version>
         <thymeleaf-layout-dialect.version>2.1.1</thymeleaf-layout-dialect.version>
         <java.version>1.8</java.version>
+        <revision>1.0.0-SNAPSHOT</revision>
     </properties>
 
     <dependencies>
